@@ -3,10 +3,11 @@ include ('topfile.php');
 
 $idupdate=$_POST['cidupdate'];
 $cid=$_POST['cid'];
+$pno=$_POST['clientpno'];
 
 /*$urlusval=base64_decode($_POST['us']);
 $urlempval=base64_decode($_POST['emp']);*/
-$clienturl="client=".base64_encode("getClientList")."&msg=";
+$clienturl="client=".base64_encode("getClientList")."&page=".base64_encode($pno)."&msg=";
 
 $insertmsg=base64_encode("Record saved successfully!");
 $updatemsg=base64_encode("Record updated successfully!");
@@ -33,53 +34,15 @@ if($idupdate==0)
     
         if($result>0)
         {
-            //echo "the value is:".$result."....row entered";
-            //setcookie("success","success",time()+5);
-            /*if(isset($urlusval))
-            {
-                if($urlusval=='getUserList')
-                {
-                header("Location: index.php?us=".base64_encode($urlusval));
-                exit();
-                }
-            }
-
-            if(isset($urlempval))
-            {
-                if($urlempval=='getEmployeeList')
-                {
-                header("Location: index.php?emp=".base64_encode($urlempval));
-                exit();
-                }
-            }*/
-            mssql_close($conn);
             header("Location: index.php?".$clienturl.$insertmsg);
             exit();
         }
         else
         {
-            //setcookie("success","failure",time()+5);
-            /*if(isset($urlusval))
-            {
-                if($urlusval=='getUserList')
-                {
-                header("Location: index.php?us=".base64_encode($urlusval));
-                exit();
-                }
-            }
-
-            if(isset($urlempval))
-            {
-                if($urlempval=='getEmployeeList')
-                {
-                header("Location: index.php?emp=".base64_encode($urlempval));
-                exit();
-                }
-            }*/
-            mssql_close($conn);
             header("Location: index.php?".$clienturl.$insertmsgerr);
             exit();
         }
+        mssql_close($conn);
     }
     else
     {
@@ -101,53 +64,15 @@ else if($idupdate==1)
     
         if($result>0)
         {
-            //echo "the value is:".$result."....row entered";
-            //setcookie("clientsuccess","success",time()+5);
-            /*if(isset($urlusval))
-            {
-                if($urlusval=='getUserList')
-                {
-                header("Location: index.php?us=".base64_encode($urlusval));
-                exit();
-                }
-            }
-
-            if(isset($urlempval))
-            {
-                if($urlempval=='getEmployeeList')
-                {
-                header("Location: index.php?emp=".base64_encode($urlempval));
-                exit();
-                }
-            }*/
-            mssql_close($conn);
             header("Location: index.php?".$clienturl.$updatemsg);
             exit();
         }
         else
         {
-            //setcookie("clientsuccess","failure",time()+5);
-            /*if(isset($urlusval))
-            {
-                if($urlusval=='getUserList')
-                {
-                header("Location: index.php?us=".base64_encode($urlusval));
-                exit();
-                }
-            }
-
-            if(isset($urlempval))
-            {
-                if($urlempval=='getEmployeeList')
-                {
-                header("Location: index.php?emp=".base64_encode($urlempval));
-                exit();
-                }
-            }*/
-            mssql_close($conn);
             header("Location: index.php?".$clienturl.$updatemsgerr);
             exit();
         }
+        mssql_close($conn);
     }
     else
     {

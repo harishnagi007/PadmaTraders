@@ -71,6 +71,7 @@ echo '
 
         <input type="hidden" id="uid" name="uid" value="-1">
         <input type="hidden" id="uidupdate" name="uidupdate" value="0">
+        <input type="hidden" id="uspno" name="uspno" value="1">
         <input class="login-input-btn" style="margin: 20px 0 0 170px" type="submit" value="Save"><!--submit button-->
         <input class="login-input-btn" style="margin: 20px 0 0 10px; width: 70px;" type="button" value="Cancel" onclick="cancelfade('.$newuser.');"><!--submit button-->
         <input class="login-input-btn" style="margin: 20px 0 0 10px" type="button" value="Reset" onclick="resetfade('.$newuser.');">
@@ -249,6 +250,7 @@ echo '
 
         <input type="hidden" id="eid" name="eid" value="-1">
         <input type="hidden" id="eidupdate" name="eidupdate" value="0">
+        <input type="hidden" id="emppno" name="emppno" value="1">
         <input class="login-input-btn" style="margin: 0 0 0 320px;" type="submit" value="Save"><!--submit button-->
         <input class="login-input-btn" style="margin: 0 0 0 10px; width: 70px;" type="button" value="Cancel" onclick="cancelfade('.$newemployee.');"><!--cancel button-->
         <input class="login-input-btn" style="margin: 0 0 0 10px;" type="button" value="Reset" onclick="resetfade('.$newemployee.');">
@@ -311,6 +313,7 @@ echo '
 
       <input type="hidden" id="cid" name="cid" value="-1">
       <input type="hidden" id="cidupdate" name="cidupdate" value="0">
+      <input type="hidden" id="clientpno" name="clientpno" value="1">
       <input class="login-input-btn" style="margin: 10px 0 0 35px" type="submit" value="Save"><!--submit button-->
       <input class="login-input-btn" style="margin: 10px 0 0 10px; width: 70px;" type="button" value="Cancel" onclick="cancelfade('.$newclient.');"><!--submit button-->
       <input class="login-input-btn" style="margin: 10px 0 0 10px" type="button" value="Reset" onclick="resetfade('.$newclient.');">
@@ -380,6 +383,7 @@ echo '
 
       <input type="hidden" id="cid" name="cid" value="'.$cid.'">
       <input type="hidden" id="cpid" name="cpid" value="-1">
+      <input type="hidden" id="cppno" name="cppno" value="1">
       <input type="hidden" id="cpidupdate" name="cpidupdate" value="0">
       <input class="login-input-btn" style="margin: 15px 0 0 35px" type="submit" value="Save"><!--submit button-->
       <input class="login-input-btn" style="margin: 15px 0 0 10px; width: 70px;" type="button" value="Cancel" onclick="cancelfade('.$newcontactperson.');"><!--submit button-->
@@ -389,11 +393,116 @@ echo '
 </div>';
 }
 
+function getCreateNewCompanyEmailList()
+{
+$newcompanylistid="'create_new_company_email_list_form'";
+//getList();
+//exit();
+
+echo '
+<div id="create-new-company-email-list-div-id" class="create-new-company-email-list-div">
+
+  <p style="height: 30px; width: 560px; margin: 0; background-color: #337ab7; border-radius: 3px;">
+    <span class="form-text">Create New Company Email List</span>
+  </p>
+
+  <form id="create_new_company_email_list_form" action="save_new_company_list.php" onsubmit="return validateAndSubmit('.$newcompanylistid.');"method="post"><!-- form-->
+
+      <table cellspacing="0" cellpadding="0" width="98%" border="0" style="border-spacing: 0px; text-align: left;">
+        <tr>
+
+          <td td colspan="2">
+            <div id="cmlist_divid1" class="form-err-div">Length to be between 3 and 30</div>
+            <span class="reddot">*</span>
+            <input id="cmlist_id1" style="width: 510px;" class="create-new-company-email-list-input-box" name="companylistname" type="text" placeholder="Company Name" title="Enter Company Name" maxlength="30" onkeypress="return isCharKey(event);" autocomplete="off" />
+          </td>
+
+        </tr>
+        <tr>
+
+          <td colspan="2">
+            <div id="cmlist_divid2" class="form-err-div">Enter Local Address</div>
+            <span class="reddot">*</span>
+            <textarea id="cmlist_id2" class="" style="width: 510px;" type="textarea" name="compaddr" placeholder="Company Address" maxlength="200" title="Enter Company Address" onkeypress="return isAddress(event);" autocomplete="off" ></textarea>
+          </td>
+
+        </tr>
+        <tr>
+
+          <td>
+            <div id="cmlist_divid3" class="form-err-div">Length to be between 2 and 25</div>
+            <span class="reddot">*</span>
+            <input id="cmlist_id3" class="create-new-company-email-list-input-box" name="city" type="text" placeholder="City" title="Enter City" maxlength="25" onkeypress="return isCharKey1(event);" autocomplete="off" />
+          </td>
+
+          <td>
+            <div id="cmlist_divid4" class="form-err-div">Length to be between 2 and 25</div>
+            <span class="reddot">*</span>
+            <input id="cmlist_id4" class="create-new-company-email-list-input-box" name="state" type="text" placeholder="State" title="Enter State" maxlength="25" onkeypress="return isCharKey1(event);" autocomplete="off" />
+          </td>
+
+        </tr>
+        <tr>        
+
+          <td style="vertical-align:baseline;">
+            <div id="cmlist_divid5" class="form-err-div">Enter Pincode</div>
+            <span class="reddot">*</span>
+            <input id="cmlist_id5" class="create-new-company-email-list-input-box" name="pincode" type="text" placeholder="Pincode" title="Enter Pincode" onkeypress="return isNumberKey(event);" maxlength="6" autocomplete="off" />
+          </td>
+  
+          <td>
+            <div id="cmlist_divid6" class="form-err-div">Select Country</div>
+            <span class="reddot">*</span>
+              <select id="cmlist_id6" class="create-new-company-email-list-select-box" name="country" title="Select Country"> 
+                <option value="0" disabled selected>Select Country</option>
+                <option value="IN">INDIA</option>
+                <option value="US">USA</option>
+              </select>
+          </td>
+
+        </tr>
+        <tr>
+
+          <td rowspan="2">
+            <div id="cmlist_divid7" class="form-err-div">Enter Subscription Message</div>
+            <span class="reddot">*</span>
+            <textarea id="cmlist_id7" class="" style="height:110px;" type="textarea" name="subsmsg" placeholder="Write a short reminder about how the recipient joined your list." maxlength="200" title="Enter Subscription Message" onkeypress="return isCharKey(event);" autocomplete="off" ></textarea>
+          </td>
+
+          <td>
+            <div id="cmlist_divid8" class="form-err-div">Length to be between 3 and 30</div>
+            <span class="reddot">*</span>
+            <input id="cmlist_id8" class="create-new-company-email-list-input-box" name="fromname" type="text" placeholder="From Name" title="Enter Your Name" maxlength="30" onkeypress="return isCharKey(event);" autocomplete="off" />
+          </td>
+
+        </tr>
+        <tr>
+
+          <td>
+            <div id="cmlist_divid9" class="form-err-div">Enter Email-ID</div>
+            <span class="reddot">*</span>
+            <input id="cmlist_id9" class="add-new-email-to-list-input-box" name="fromemail" type="text" placeholder="From Email-ID" title="Enter Your Email-ID" maxlength="40" onkeypress="return isEmail(event);" autocomplete="off" />
+          </td>
+
+        </tr>
+      </table>
+
+        <input type="hidden" id="cmlid" name="cmlid" value="-1">
+        <input type="hidden" id="cmlidupdate" name="cmlidupdate" value="0">
+        <input class="login-input-btn" style="margin: 20px 0 0 170px;" type="submit" value="Save"><!--submit button-->
+        <input class="login-input-btn" style="margin: 20px 0 0 10px; width: 70px;" type="button" value="Cancel" onclick="cancelfade('.$newcompanylistid.');"><!--submit button-->
+        <input class="login-input-btn" style="margin: 20px 0 0 10px;" type="button" value="Reset" onclick="resetfade('.$newcompanylistid.');">
+
+  </form> 
+</div>';
+}
+
 function getAddNewEmailToList()
 {
 $newemailid="'add_new_email_to_list_form'";
 $listname="'listname'";
-//onsubmit="return validateAndSubmit('.$newemailid.');"
+//getList();
+//exit();
 
 echo '
 <div id="add-new-email-to-list-div-id" class="add-new-email-to-list-div">
@@ -459,6 +568,326 @@ echo '
 </div>';
 }
 
+function getSendBulkEmail()
+{
+$sendbulkemail="'send_bulk_email_form'";
+$listname="'smlistname'";
+//getTemplate();
+//getList();
+//exit();
+
+echo '
+<div id="send-bulk-email-div-id" class="send-bulk-email-div">
+
+  <p style="height: 30px; width: 550px; margin: 0; background-color: #337ab7; border-radius: 3px;">
+    <span class="form-text">Send Bulk Email</span>
+  </p>
+
+  <form id="send_bulk_email_form" action="send_bulk_email.php" onsubmit="return validateAndSubmit('.$sendbulkemail.');" method="post">
+
+      <table cellspacing="0" cellpadding="0" width="98%" border="0" style="border-spacing: 0px; text-align: left;">
+        <tr>
+
+          <td>
+            <div id="sm_divid1" class="form-err-div">Length to be between 3 and 30</div>
+            <span class="reddot">*</span>
+            <input id="sm_id1" class="send-bulk-email-input-box" name="fromname" type="text" placeholder="From Name" title="Enter Your Name" maxlength="30" onkeypress="return isCharKey(event);" autocomplete="off" />
+          </td>
+
+          <td>
+            <div id="sm_divid2" class="form-err-div">Enter Email-ID</div>
+            <span class="reddot">*</span>
+            <input id="sm_id2" class="send-bulk-email-input-box" name="fromemail" type="text" placeholder="From Email-ID" title="Enter Your Email-ID" maxlength="40" onkeypress="return isEmail(event);" autocomplete="off" />
+          </td>
+
+        </tr>   
+        <tr>
+
+          <td colspan="2">
+            <div id="sm_divid3" class="form-err-div">Enter Subject</div>
+            <span class="reddot">*</span>
+            <textarea id="sm_id3" class="" style="width: 505px; height: 70px;" type="textarea" name="subject" placeholder="Subject" maxlength="100" title="Enter Email Subject" onkeypress="return isAddress(event);" autocomplete="off" ></textarea>
+          </td>
+
+        </tr>
+        <tr>
+
+          <td colspan="2">
+            <div id="sm_divid6" class="form-err-div">Enter Subject</div>
+            <span class="reddot" style="visibility: hidden;">*</span>
+            <textarea id="sm_id6" class="" style="width: 505px; height: 200px;" type="textarea" name="message" placeholder="Message" maxlength="200" title="Enter Email Message" onkeypress="return isAddress(event);" autocomplete="off" ></textarea>
+          </td>
+
+        </tr>        
+        <tr>
+
+          <td>
+            <div id="sm_divid4" class="form-err-div">Select List</div>
+            <span class="reddot">*</span>
+              <select id="sm_id4" class="send-bulk-email-select-box" name="list_id" title="Select List to send email to" onchange="document.getElementById('.$listname.').value=this.options[this.selectedIndex].innerText;"> 
+                <option value="0" disabled selected>Select List</option>';
+                echo getList();
+              echo' 
+              </select>
+          </td>
+
+          <td>
+            <div id="sm_divid5" class="form-err-div">Select Template</div>
+            <span class="reddot">*</span>
+              <select id="sm_id5" class="send-bulk-email-select-box" name="temp_id" title="Select Template" > 
+                <option value="0" disabled selected>Select Template</option>';
+                echo getTemplate();
+              echo' 
+              </select>
+          </td>
+
+        </tr>
+      </table>
+
+        <input type="hidden" id="smid" name="smid" value="-1">
+        <input type="hidden" id="smidupdate" name="smidupdate" value="0">
+        <input type="hidden" id="smlistname" name="smlistname" value="">
+        <input class="login-input-btn" style="margin: 20px 0 0 170px" type="submit" value="Send"><!--submit button-->
+        <input class="login-input-btn" style="margin: 20px 0 0 10px; width: 70px;" type="button" value="Cancel" onclick="cancelfade('.$sendbulkemail.');"><!--submit button-->
+        <input class="login-input-btn" style="margin: 20px 0 0 10px" type="button" value="Reset" onclick="resetfade('.$sendbulkemail.');">
+
+  </form> 
+</div>';
+}
+
+function getSendEmail()
+{
+$sendemail="'send_email_form'";
+$listname="'semlistname'";
+$attachfile="'attach_file'";
+
+//getTemplate();
+//getList();
+//exit();
+
+echo '
+<div id="send-email-div-id" class="send-email-div">
+
+  <p style="height: 30px; width: 550px; margin: 0; background-color: #337ab7; border-radius: 3px;">
+    <span class="form-text">Send Email</span>
+  </p>
+
+  <form id="send_email_form" action="send_email.php" enctype="multipart/form-data" onsubmit="return validateAndSubmit('.$sendemail.');" method="post">
+
+      <table cellspacing="0" cellpadding="0" width="98%" border="0" style="border-spacing: 0px; text-align: left;">
+        <tr>
+
+          <td>
+            <div id="sem_divid1" class="form-err-div">Length to be between 3 and 30</div>
+            <span class="reddot">*</span>
+            <input id="sem_id1" class="send-email-input-box" name="fromname" type="text" placeholder="From Name" title="Enter From Name" maxlength="30" onkeypress="return isCharKey(event);" autocomplete="off" value="Newmat.in"/>
+          </td>
+
+          <td>
+            <div id="sem_divid2" class="form-err-div">Enter Email-ID</div>
+            <span class="reddot">*</span>
+            <input id="sem_id2" class="send-email-input-box" name="fromemail" type="text" placeholder="From Email-ID" title="Enter From Email-ID" maxlength="40" onkeypress="return isEmail(event);" autocomplete="off" value="hello@newmat.in"/>
+          </td>
+
+        </tr>   
+        <tr>
+
+          <td>
+            <div id="sem_divid3" class="form-err-div">Length to be between 3 and 30</div>
+            <span class="reddot">*</span>
+            <input id="sem_id3" class="send-email-input-box" name="toname" type="text" placeholder="First & Last name" title="Enter To Name" maxlength="30" onkeypress="return isCharKey(event);" autocomplete="off" />
+          </td>
+
+          <td>
+            <div id="sem_divid4" class="form-err-div">Enter Email-ID</div>
+            <span class="reddot">*</span>
+            <input id="sem_id4" class="send-email-input-box" name="toemail" type="text" placeholder="To Email-ID" title="Enter To Email-ID" maxlength="40" onkeypress="return isEmail(event);" autocomplete="off" />
+          </td>
+
+        </tr>         
+        <tr>
+
+          <td colspan="2">
+            <div id="sem_divid5" class="form-err-div">Enter Subject</div>
+            <span class="reddot">*</span>
+            <textarea id="sem_id5" class="" style="width: 505px; height: 70px;" type="textarea" name="subject" placeholder="Subject" maxlength="100" title="Enter Email Subject" onkeypress="return isAddress(event);" autocomplete="off"></textarea>
+          </td>
+
+        </tr>
+        <tr>
+
+          <td colspan="2">
+            <div id="sem_divid6" class="form-err-div">Enter Content</div>
+            <span class="reddot" style="visibility: hidden;">*</span>
+            <textarea id="sem_id6" class="" style="width: 505px; height: 140px;" type="textarea" name="content" placeholder="Message" maxlength="200" title="Enter Email Message" onkeypress="return isAddress(event);" autocomplete="off"></textarea>
+          </td>
+
+        </tr>        
+        <tr>
+
+          <td>
+            <div id="sem_divid7" class="form-err-div">Select Template</div>
+            <span class="reddot" style="visibility: hidden;">*</span>
+              <select id="sem_id7" class="send-email-select-box" name="template_name" title="Select Template" > 
+                <option value="0" disabled selected>Select Template</option>';
+                echo getMandrillTemplate();
+              echo' 
+              </select>
+          </td>
+
+          <td style="vertical-align: middle;">
+            <div id="sem_addatch" style="color: #4CAF50; margin-left: 20px; visibility: visible;">Add Attachment</div>
+            <span class="reddot" style="visibility: hidden;">*</span>
+            <input id="attach_file" class="" name="attachmentfile" style="margin: 5px 0 0 5px; width: 200px; /*outline: none;*/ cursor: pointer;" type="file" onclick="" accept=".ppt, .pptx, .pdf" onchange="validateFileType('.$attachfile.',this)" />
+
+            <span id="clearfile" onclick="clearfile('.$attachfile.');" style="opacity: 0.8; cursor: pointer; margin: 0 0 0 5px; display: inline-block;" title="Clear File"><img src="images/clear.png" alt="clear" style="height: 18px; width: 18px;"></span>
+          </td>
+
+        </tr>
+      </table>
+
+        <input type="hidden" id="semid" name="semid" value="-1">
+        <input type="hidden" id="semidupdate" name="semidupdate" value="0">
+        <input type="hidden" id="semlistname" name="semlistname" value="">
+        <input class="login-input-btn" style="margin: 15px 0 0 170px" type="submit" value="Send"><!--submit button-->
+        <input class="login-input-btn" style="margin: 15px 0 0 10px; width: 70px;" type="button" value="Cancel" onclick="cancelfade('.$sendemail.');"><!--submit button-->
+        <input class="login-input-btn" style="margin: 15px 0 0 10px" type="button" value="Reset" onclick="resetfade('.$sendemail.');">
+
+  </form> 
+</div>';
+}
+
+function getNewProjectForm()
+{
+$newproject="'add_new_project_form'";
+
+echo '
+<div id="add-new-project-div-id" class="add-new-project-div">
+
+  <p style="height: 30px; width: 815; margin: 0; background-color: #337ab7; border-radius: 3px;">
+    <span class="form-text">Add New Project</span>
+  </p>
+
+  <form id="add_new_project_form" action="save_new_project1.php" onsubmit="return validateAndSubmit('.$newproject.');" method="post"><!--add new project form-->
+
+      <table cellspacing="0" cellpadding="0" width="98%" border="0" style="border-spacing: 0px; text-align: left;">
+        <tr>
+
+          <td>
+            <div id="project_divid1" class="form-err-div">Length to be between 3 and 20</div>
+            <span class="reddot">*</span>
+            <input id="project_id1" class="add-new-project-input-box" name="name" type="text" placeholder="Project Name" title="Enter Project Name" maxlength="30" onkeypress="return isCharKey(event);" autocomplete="off" />
+          </td>
+
+          <td>
+            <div id="project_divid2" class="form-err-div">Select User type</div>
+            <span class="reddot">*</span>
+            <select id="project_id2" class="add-new-project-select-box" name="empname" title="Select Available Employee" > 
+              <option value="0" disabled selected>Select Employee</option>';
+                echo getAvailableEmployee();
+              echo' 
+              </select>
+          </td>
+
+          <td>
+            <div id="project_divid3" class="form-err-div">Select User type</div>
+            <span class="reddot">*</span>
+            <select id="project_id3" class="add-new-project-select-box" name="projecttype" title="Select Project Type" > 
+              <option value="" disabled selected>Select Project Type</option>
+              <option value="Fresh">Fresh Installation</option>
+              <option value="Paid Maintenance">Paid Maintenance</option>
+              <option value="Free Maintenance">Free Maintenance</option>
+            </select>
+          </td>
+
+        </tr>
+        <tr>
+
+          <td colspan="3">
+            <div id="project_divid4" class="form-err-div">Project Address</div>
+            <span class="reddot" style="visibility: hidden;">*</span>
+            <textarea id="project_id4" class="" style="width: 762px;" type="textarea" name="projectaddr" placeholder="Project Address" maxlength="200" title="Enter Project Address" onkeypress="return isAddress(event);" autocomplete="off" ></textarea>
+          </td>
+
+        </tr>
+        <tr>
+
+          <td style="vertical-align:baseline;">
+            <div id="project_divid5" style="color: #4CAF50; margin-left: 20px; visibility: visible;">Select Start Date</div>
+            <span class="reddot" style="visibility: hidden;">*</span>
+            <input id="project_id5" type="text" class="month_and_year_option add-new-project-input-box" name="startdate" value="'.date('d-M-Y').'" readonly title="Start Date" autocomplete="off" />
+                  <script>
+                          $(function()
+                          {
+                            $(".month_and_year_option").datepicker(
+                            {
+                              changeMonth: true,
+                              changeYear: true,
+                              dateFormat : "dd-M-yy",
+                              yearRange: "-100:+0",
+                              yearRange: "1990:+20"
+                            });
+                          });
+                  </script>
+          </td>
+
+          <td style="vertical-align:baseline;">
+            <div id="project_divid6" style="color: #4CAF50; margin-left: 20px; visibility: visible;">Select End Date</div>
+            <span class="reddot" style="visibility: hidden;">*</span>
+            <input id="project_id6" type="text" class="month_and_year_option add-new-project-input-box" name="enddate" value="'.date('d-M-Y').'" readonly title="Start Date" autocomplete="off" />
+                  <script>
+                          $(function()
+                          {
+                            $(".month_and_year_option").datepicker(
+                            {
+                              changeMonth: true,
+                              changeYear: true,
+                              dateFormat : "dd-M-yy",
+                              yearRange: "-100:+0",
+                              yearRange: "1990:+20"
+                            });
+                          });
+                  </script>
+          </td>
+
+          <td style="vertical-align:baseline;">
+            <div id="project_divid7" class="form-err-div">Select Project Status</div>
+            <span class="reddot">*</span>
+            <select id="project_id7" class="add-new-project-select-box" name="projectstatus" title="Select Project Status" > 
+              <option value="" disabled selected>Select Project Status</option>
+              <option value="Admin">Started</option>
+              <option value="User">In Progress</option>
+              <option value="User">Completed</option>
+              <option value="User">Closed</option>
+            </select>
+          </td>
+
+        </tr>
+        <tr>
+
+          <td colspan="3">
+            <div id="project_divid8" class="form-err-div">Remarks (If Any)</div>
+            <span class="reddot" style="visibility: hidden;">*</span>
+            <textarea id="project_id8" class="" style="width: 762px;" type="textarea" name="localaddr" placeholder="Remarks (If Any)" maxlength="200" title="Remarks (If Any)" onkeypress="return isAddress(event);" autocomplete="off" ></textarea>
+          </td>
+
+        </tr>
+      </table>
+
+        <input type="hidden" id="projid" name="projid" value="-1">
+        <input type="hidden" id="projidupdate" name="projidupdate" value="0">
+        <input type="hidden" id="projpno" name="projpno" value="1">
+        <input class="login-input-btn" style="margin: 15px 0 0 300px" type="submit" value="Save"><!--submit button-->
+        <input class="login-input-btn" style="margin: 15px 0 0 10px; width: 70px;" type="button" value="Cancel" onclick="cancelfade('.$newproject.');"><!--cancel button-->
+        <input class="login-input-btn" style="margin: 15px 0 0 10px" type="button" value="Reset" onclick="resetfade('.$newproject.');">
+
+  </form> 
+</div>';
+}
+
+
+
+
 
 
 
@@ -476,6 +905,16 @@ $userlist="'user-list-div-id'";
 $newuser="'add_new_user_form'";
 
 $printmsg=getMsg();
+$pageno=array();
+$pageno=getPagination('user-list-div-id');
+
+$query="WITH LIMIT AS
+        ( 
+        select ROW_NUMBER() OVER (ORDER BY id DESC) As '#',
+        id,name,loginid,password,usertype,status,CONVERT(char(11), createdon ,106)  as createdon,createdby=(select name from padma_login c where c.id=p.CREATEDBY) 
+        from padma_login p where id!=1
+        ) 
+        select * from LIMIT WHERE # BETWEEN ".$pageno[0]." AND ".$pageno[1];
 
 echo '
 <div id="user-list-div-id" class="user-list-div">
@@ -495,6 +934,8 @@ echo '
     </div>' ;
 
 echo $printmsg;
+
+echo $pageno[2];
 
   echo '
   </div>
@@ -519,8 +960,6 @@ $conn=db_conn();
 
 if($conn)
 {
-  $query="select ROW_NUMBER() OVER (ORDER BY id DESC) As #,id,name,loginid,password,usertype,status,CONVERT(char(11), createdon ,106)  as createdon,createdby=(select name from padma_login c where c.id=p.CREATEDBY) 
-    from padma_login p where id!=1 order by id desc";
 
   $result=mssql_query($query);
   $i=0;
@@ -578,10 +1017,8 @@ else
   die("db error: ".mssql_get_last_message());
 }
 
-echo '
-  </table>
+echo '</table>'.$pageno[2].'</div>';
 
-</div>';
 }
 
 function getEmployeeList()
@@ -591,6 +1028,17 @@ $empdetail="'emp-detail-div-id'";
 $newemployee="'add_new_employee_form'";
 
 $printmsg=getMsg($msg);
+$pageno=array();
+$pageno=getPagination('emp-list-div-id');
+
+$query="WITH LIMIT AS
+          ( 
+          select ROW_NUMBER() OVER (ORDER BY id DESC) As '#',
+          id,firstname,lastname,FIRSTNAME+' '+LASTNAME as name,age,cno1,cno2,cno3,localaddr,villageaddr,
+          CONVERT(char(11), DOJ ,106) as doj,aadhar,pan,activestatus,photopath,aadharpath,panpath,passportpath,otherpath
+          from padma_employee
+          ) 
+          select * from LIMIT WHERE # BETWEEN ".$pageno[0]." AND ".$pageno[1];
 
 echo '
 <div id="emp-list-div-id" class="emp-list-div">
@@ -611,14 +1059,16 @@ echo '
 
 echo $printmsg;
 
+echo $pageno[2];
+
   echo '
   </div>
 
   <table cellspacing="0" cellpadding="0" width="100%" border="0" style="border-spacing: 0px; text-align: left; ">
     <thead style="margin-left: 100px; ; background-color: #337ab7; line-height: 35px; color: white; font-size: 13px;">
       <tr>
-        <th width=20 style="padding-left: 5px">#</th>
-        <th width=320>Name</th> 
+        <th width=30 style="padding-left: 5px">#</th>
+        <th width=305>Name</th> 
         <th width=65>Age</th>
         <th width=125>Phone #1</th>
         <!--th width=120>Phone #2</th>
@@ -639,9 +1089,9 @@ $conn=db_conn();
 
 if($conn)
 {
-  $query="select ROW_NUMBER() OVER (ORDER BY id DESC) As #,id,firstname,lastname,FIRSTNAME+' '+LASTNAME as name,age,cno1,cno2,cno3,localaddr,villageaddr,CONVERT(char(11), DOJ ,106) as doj,aadhar,pan,activestatus,photopath,aadharpath,panpath,passportpath,otherpath from padma_employee order by id desc";
   $result=mssql_query($query);
   $i=0;
+
   if(mssql_num_rows($result)>0)
   {
     while($row=mssql_fetch_assoc($result)) 
@@ -725,7 +1175,7 @@ if($conn)
 
       echo '<td width=30 class="tabledata"><input type="button" title="Edit" class="editimagebtn" value="" onclick="displayempeditbox('.$newemployee.','.$eid.','.$firstname.','.$lastname.','.$age.','.$cno1.','.$cno2.','.$cno3.','.$localaddr.','.$villageaddr.','.$doj.','.$aadhar.','.$pan.','.$activestatus.','.$photopath.','.$aadharpath.','.$panpath.','.$passportpath.','.$otherpath.','.$update.');"></td>';
 
-      $empdurl="'empd=".base64_encode("getEmployeeDetails")."&eid=".base64_encode(str_replace("'","",$eid))."'";
+      $empdurl="'?empd=".base64_encode("getEmployeeDetails")."&eid=".base64_encode(str_replace("'","",$eid))."'";
 
       echo '<td width=60 class="tabledata" style="border-right: 1px solid black;"><input type="button" title="View '.str_replace("'","",strtoupper($firstname)).' Details" class="viewimagebtn" onclick="viewdetailbox('.$empdetail.','.$empdurl.');"></td>';
 
@@ -745,10 +1195,8 @@ else
   die("db error: ".mssql_get_last_message());
 }
 
-echo '
-  </table>
+echo '</table>'.$pageno[2].'</div>';
 
-</div>';
 }
 
 function getClientList()
@@ -758,6 +1206,16 @@ $clientdetail="'client-detail-div-id'";
 $newclient="'add_new_client_form'";
 
 $printmsg=getMsg($msg);
+$pageno=array();
+$pageno=getPagination('client-list-div-id');
+
+$query="WITH LIMIT AS
+        ( 
+        select ROW_NUMBER() OVER (ORDER BY id DESC) As '#',
+        id,companyname,billingaddr,gstno,panno
+        from padma_client
+        ) 
+        select * from LIMIT WHERE # BETWEEN ".$pageno[0]." AND ".$pageno[1];
 
 echo '
 <div id="client-list-div-id" class="client-list-div">
@@ -777,6 +1235,8 @@ echo '
     </div>';
 
 echo $printmsg;
+
+echo $pageno[2];
 
   echo '
   </div> 
@@ -800,8 +1260,6 @@ $conn=db_conn();
 
 if($conn)
 {
-  $query="select ROW_NUMBER() OVER (ORDER BY id DESC) As #,id,companyname,billingaddr,gstno,panno from padma_client order by id desc";
-
   $result=mssql_query($query);
   $i=0;
 
@@ -843,7 +1301,7 @@ if($conn)
 
       echo '<td width=30 class="tabledata"><input type="button" class="editimagebtn" title="Edit" value="" onclick="displayclienteditbox('.$newclient.','.$cid.','.$companyname.','.$billingaddr.','.$gstno.','.$panno.','.$update.');"</td>';
 
-      $clientdurl="'clientd=".base64_encode("getClientDetails")."&cid=".base64_encode(str_replace("'","",$cid))."'";
+      $clientdurl="'?clientd=".base64_encode("getClientDetails")."&page=".base64_encode(1)."&cid=".base64_encode(str_replace("'","",$cid))."'";
 
       echo '<td width=120 class="tabledata" style="border-right: 1px solid black;"><input type="button" title="View '.str_replace("'","",strtoupper($companyname)).' Details" class="viewimagebtn" onclick="viewdetailbox('.$clientdetail.','.$clientdurl.');"></td>';
 
@@ -863,10 +1321,186 @@ else
   die("db error: ".mssql_get_last_message());
 }
 
-echo '
-  </table>
+echo '</table>'.$pageno[2].'</div>';
 
-</div>';
+}
+
+function getProjectList()
+{
+$emplist="'emp-list-div-id'";
+$empdetail="'emp-detail-div-id'";
+$newproject="'add_new_project_form'";
+
+$printmsg=getMsg($msg);
+$pageno=array();
+$pageno=getPagination('emp-list-div-id');
+
+$query="WITH LIMIT AS
+          ( 
+          select ROW_NUMBER() OVER (ORDER BY id DESC) As '#',
+          id,firstname,lastname,FIRSTNAME+' '+LASTNAME as name,age,cno1,cno2,cno3,localaddr,villageaddr,
+          CONVERT(char(11), DOJ ,106) as doj,aadhar,pan,activestatus,photopath,aadharpath,panpath,passportpath,otherpath
+          from padma_employee
+          ) 
+          select * from LIMIT WHERE # BETWEEN ".$pageno[0]." AND ".$pageno[1];
+
+echo '
+<div id="emp-list-div-id" class="emp-list-div">
+
+  <div style="width: 100%; height: 72px; margin: 0;">
+
+    <p style="height: 30px; width: 100%; margin:0; background-color: #337ab7; border-radius: 3px;">
+      <span class="form-text">Employee List</span>
+      <span onclick="cancelfade('.$emplist.');" title="Close" style="float: right; cursor: pointer;">
+        <img src="images/close.png" alt="close" class="span-text">
+      </span>
+    </p>
+
+    <div style="float: right; width: 270px;">
+      <input class="login-input-btn" style="float: right; margin: 5px 15px 5px 10px; width: 68px;" type="button" value="Export" onclick="export('.$newemployee.');">
+      <input class="login-input-btn" style="float: right; margin: 5px 0 5px 0; width: 135px;" type="button" value="Add New Project" onclick="displayfade('.$newproject.');">
+    </div>';
+
+echo $printmsg;
+
+echo $pageno[2];
+
+  echo '
+  </div>
+
+  <table cellspacing="0" cellpadding="0" width="100%" border="0" style="border-spacing: 0px; text-align: left; ">
+    <thead style="margin-left: 100px; ; background-color: #337ab7; line-height: 35px; color: white; font-size: 13px;">
+      <tr>
+        <th width=30 style="padding-left: 5px">#</th>
+        <th width=305>Name</th> 
+        <th width=65>Age</th>
+        <th width=125>Phone #1</th>
+        <!--th width=120>Phone #2</th>
+        <th width=120>Phone #3</th-->
+        <!--th width=280>Local Address</th-->
+        <!--th width=140>Village Addr</th-->
+        <th width=100>DOJ</th>
+        <th width=120>Aadhar</th>
+        <th width=100>PAN</th> 
+        <th width=100>Active</th>
+        <th width=100>Action</th>
+      </tr>
+    </thead>
+  </table>
+  <table class="demotable" cellspacing="0" cellpadding="0" border="0" style="border-spacing: 0px; text-align: left;">';
+
+$conn=db_conn();
+
+if($conn)
+{
+  $result=mssql_query($query);
+  $i=0;
+
+  if(mssql_num_rows($result)>0)
+  {
+    while($row=mssql_fetch_assoc($result)) 
+    {
+      //echo '<tr><td colspan="8" style="padding: 4px;"></td></tr>';
+      if($i%2==0)
+        echo '<tr class="odd">';
+      else
+        echo '<tr class="even">';
+
+      echo '<td width=30 class="tabledata" style="padding-left: 6px;">'.$row["#"].'</td>';
+      echo '<td style="display: none;">'.$row["id"].'</td>';
+      echo '<td style="display: none;">'.$row["firstname"].'</td>';
+      echo '<td style="display: none;">'.$row["lastname"].'</td>';
+      echo '<td width=320 class="tabledata">'.$row["name"].'</td>';
+      echo '<td width=50 class="tabledata">'.$row["age"].'</td>';
+      echo '<td width=120 class="tabledata">'.$row["cno1"].'</td>';
+      /*echo '<td width=120 class="tabledata">'; 
+      if($row["cno2"]==0)
+        echo '<span>--/--</span>';
+      else
+        echo $row["cno2"];
+      echo '</td>'; 
+      echo '<td width=120 class="tabledata">';
+      if($row["cno3"]==0)
+        echo '<span>--/--</span>';
+      else
+        echo $row["cno3"];
+      echo '</td>'; */
+      //echo '<td width=300 class="tabledata">'.$row["localaddr"].'</td>';
+      /*echo '<td width=140 class="tabledata">';
+      if($row["villageaddr"]==null)
+        echo '<span>--/--</span>';
+      else
+        echo $row["villageaddr"];
+      echo '</td>'; */
+      echo '<td width=105 class="tabledata">'.$row["doj"].'</td>';
+
+      echo '<td width=120 class="tabledata">';
+      if($row["aadhar"]==0)
+        echo '<span>--/--</span>';
+      else
+        echo $row["aadhar"];
+      echo '</td>';
+
+      echo '<td width=120 class="tabledata">';
+      if($row["pan"]==null||$row["pan"]=="")
+        echo '<span>--/--</span>';
+      else
+        echo $row["pan"];
+      echo '</td>';
+
+      echo '<td width=100 class="tabledata">';
+      if($row["activestatus"]==1)
+        echo '<span style="background-color: #DFF2BF; color: green; padding: 0 10px 0 10px; border: 1px solid green;">Yes</span>';
+      else
+        echo '<span style="background-color: #FFBABA; color: red; padding: 0 7px 0 7px; border: 1px solid red;">No</span>';
+      echo '</td>';
+      
+      $eid="'".$row["id"]."'";
+      $firstname="'".$row["firstname"]."'";
+      $lastname="'".$row["lastname"]."'";
+      $age="'".$row["age"]."'";
+      $cno1=$row["cno1"];
+      $cno2=$row["cno2"]?$row["cno2"]:"''";
+      $cno3=$row["cno3"]?$row["cno3"]:"''";
+      $localaddr="'".$row["localaddr"]."'";
+      $villageaddr="'".$row["villageaddr"]."'";
+      $doj="'".str_replace(' ', '-', $row["doj"])."'";
+      $aadhar=$row["aadhar"]?$row["aadhar"]:"''";
+      $pan=$row["pan"]?"'".$row["pan"]."'":"''";
+      $activestatus=$row["activestatus"];
+
+      $photopath="'".base64_decode($row["photopath"])."'";
+      $aadharpath="'".base64_decode($row["aadharpath"])."'";
+      $panpath="'".base64_decode($row["panpath"])."'";
+      $passportpath="'".base64_decode($row["passportpath"])."'";
+      $otherpath="'".base64_decode($row["otherpath"])."'";
+
+      $update="1";
+
+      echo '<td width=30 class="tabledata"><input type="button" title="Edit" class="editimagebtn" value="" onclick="displayempeditbox('.$newemployee.','.$eid.','.$firstname.','.$lastname.','.$age.','.$cno1.','.$cno2.','.$cno3.','.$localaddr.','.$villageaddr.','.$doj.','.$aadhar.','.$pan.','.$activestatus.','.$photopath.','.$aadharpath.','.$panpath.','.$passportpath.','.$otherpath.','.$update.');"></td>';
+
+      $empdurl="'?empd=".base64_encode("getEmployeeDetails")."&eid=".base64_encode(str_replace("'","",$eid))."'";
+
+      echo '<td width=60 class="tabledata" style="border-right: 1px solid black;"><input type="button" title="View '.str_replace("'","",strtoupper($firstname)).' Details" class="viewimagebtn" onclick="viewdetailbox('.$empdetail.','.$empdurl.');"></td>';
+
+      echo '</tr>';
+      //echo 'this contains data: '.$result;
+      $i++;
+    }
+  }
+  else
+  {
+    //echo 'this contains no data: '.$result;
+  }
+  mssql_close($conn);
+}
+else
+{
+  die("db error: ".mssql_get_last_message());
+}
+
+echo '</table>'.$pageno[2].'</div>';
+
 }
 
 
@@ -885,7 +1519,7 @@ echo '
 function getEmployeeDetails()
 {
 $empdetail="'emp-detail-div-id'";
-$urlvalue="'".base64_encode('getEmployeeList')."'";
+$urlvalue="'?emp=".base64_encode('getEmployeeList')."&page=".base64_encode($_SESSION['val'])."'";
 
 if(isset($_GET['empd'])&&(isset($_GET['eid'])))
 {
@@ -1115,7 +1749,7 @@ echo '
 function getClientDetails()
 {
 $clientdetail="'client-detail-div-id'";
-$urlvalue="'".base64_encode('getClientList')."'";
+$urlvalue="'?client=".base64_encode('getClientList')."&page=".base64_encode($_SESSION['val'])."'";
 
 $newcontactperson="'add_new_contact_person_form'";
 
@@ -1214,6 +1848,9 @@ else
 
 $tab1="contact-person-list-div-id";
 
+$pageno=array();
+$pageno=getPagination('contact-person-list-div-id',$cid);
+
 echo '
   </table>
 
@@ -1225,6 +1862,8 @@ echo '
     </div>';
 
 echo $printmsg;
+
+echo $pageno[2];
 
  echo' 
  </div>
@@ -1256,7 +1895,14 @@ $conn=db_conn();
 
 if($conn)
 {
-  $query="select ROW_NUMBER() OVER (ORDER BY id DESC) As #,id,contactpersonname,cno1,cno2,email,cid from padma_contactperson where cid=".$cid."order by id desc";
+  $query="WITH LIMIT AS
+        ( 
+        select ROW_NUMBER() OVER (ORDER BY id DESC) As '#',
+        id,contactpersonname,cno1,cno2,email,cid
+        from padma_contactperson
+        where cid=".$cid."
+        ) 
+        select * from LIMIT WHERE # BETWEEN ".$pageno[0]." AND ".$pageno[1];
 
   $result=mssql_query($query);
   $i=0;
@@ -1317,11 +1963,12 @@ else
   die("db error: ".mssql_get_last_message());
 }
 
-echo '
-    </table>
-  </div>
+echo '</table>
+  </div>';
 
-</div>';
+echo $pageno[2];
+
+echo '</div>';
 }
 
 
